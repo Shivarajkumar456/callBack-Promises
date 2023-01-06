@@ -15,8 +15,8 @@ function getPost(){
 }
 
 
-function createPost(post){
-    return new Promise((resolve, reject) =>{
+async function createPost(post){
+    const created = await new Promise((resolve, reject) =>{
         setTimeout(()=>{
             posts.push({...post, createdAt:new Date().getTime()});
             const error = true;
@@ -35,8 +35,8 @@ function createPost(post){
 
  setInterval(getPost, 1000);
 
- function deletePost() {
-    return new Promise((resolve, reject) => {
+ async function deletePost() {
+    const del1 = await new Promise((resolve, reject) => {
       setTimeout(() => {
         if (posts.length > 0) {
             let deletedElement = posts.pop();
@@ -48,7 +48,8 @@ function createPost(post){
       }, 3000);
     });
   }
-  
+  deletePost().then(() => {
+        console.log("Deleted last element of the array")});
 //   deletePost().then(() => {
 //     console.log("Deleted last element of the array");
 //     return deletePost();
@@ -64,49 +65,49 @@ function createPost(post){
 //   }).catch((error) => {
 //     console.log(error);
 //   });
-function updateLastUserActivityTime() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        lastActivityTime = new Date().getTime();
-        resolve();
-      }, 1000);
-    });
-  }
+// function updateLastUserActivityTime() {
+//     return new Promise((resolve) => {
+//       setTimeout(() => {
+//         lastActivityTime = new Date().getTime();
+//         resolve();
+//       }, 1000);
+//     });
+//   }
 
 
-  createPost({title:'Post fourth', body: ' This is Post Four'}).then(updateLastUserActivityTime).then(()=>{
-    getPost();
-    console.log("All posts:", posts);
-    console.log("Last activity time:", lastActivityTime);
-    deletePost().then((deleedElement)=>{
-        console.log(deleedElement);
-        getPost();
-        deletePost().then((deleedElement)=>{
-            console.log(deleedElement);
-            getPost();
-            deletePost().then((deleedElement)=>{
-                console.log(deleedElement);
-                getPost();
-                deletePost().then((deleedElement)=>{
-                    console.log(deleedElement);
-                    getPost();
-                    deletePost().then(()=>{}).catch((error)=>{
-                        console.log("Inside catch block", error)
-                    })
-                }).catch((error)=>{
-                    console.log("Inside catch block", error);
-                })
-            }).catch((error)=>{
-                console.log("Inside catch block", error);
-            })
-        }).catch((error)=>{
-            console.log("Inside catch block", error);
-        })
-    }).catch((error)=>{
-        console.log("Inside catch block", error);
-    })
-  }).catch(error =>{
-    console.log(error);
- });
+//   createPost({title:'Post fourth', body: ' This is Post Four'}).then(updateLastUserActivityTime).then(()=>{
+//     getPost();
+//     console.log("All posts:", posts);
+//     console.log("Last activity time:", lastActivityTime);
+//     deletePost().then((deleedElement)=>{
+//         console.log(deleedElement);
+//         getPost();
+//         deletePost().then((deleedElement)=>{
+//             console.log(deleedElement);
+//             getPost();
+//             deletePost().then((deleedElement)=>{
+//                 console.log(deleedElement);
+//                 getPost();
+//                 deletePost().then((deleedElement)=>{
+//                     console.log(deleedElement);
+//                     getPost();
+//                     deletePost().then(()=>{}).catch((error)=>{
+//                         console.log("Inside catch block", error)
+//                     })
+//                 }).catch((error)=>{
+//                     console.log("Inside catch block", error);
+//                 })
+//             }).catch((error)=>{
+//                 console.log("Inside catch block", error);
+//             })
+//         }).catch((error)=>{
+//             console.log("Inside catch block", error);
+//         })
+//     }).catch((error)=>{
+//         console.log("Inside catch block", error);
+//     })
+//   }).catch(error =>{
+//     console.log(error);
+//  });
   
- 
+
